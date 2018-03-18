@@ -99,7 +99,7 @@ i.e. something similar to `R CMD javareconf` to help mitigate these issues.
 1000 downstream dependencies, the experience of having written Rcpp is extremely valuable in the pursuit of
 this project. Romain pioneered integration of Go into R in a series of 
 blog post in the 2017 summer. He has more than 12 years professional of experience with R and 
-a string commitment to open source development. 
+a strong commitment to open source development. 
 
 [Kirill Müller](https://twitter.com/krlmlr) applied the techniques developed by Romain for 
 successful completion of the “Joint profiling of R and native code” project, 
