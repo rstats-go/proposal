@@ -1,6 +1,7 @@
 ---
 title: "ergo: high level interface between R and Go"
 author: "Romain François"
+date: 2018/03/30
 output: pdf_document
 ---
 
@@ -10,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # The problem
 
-R is an amazing interpreted language, giving a flexible and agile foundation for data science. 
+R is an amazing interpreted language, giving a flexible and agile foundation for Data Science. 
 Efforts such as Rcpp and reticulate have established that it can be an advantage 
 to pair R with another programming language. Sometimes for speed, but most importantly 
 to have alternative options of expression. 
@@ -21,10 +22,10 @@ C++ should have been, in particular if it did not carry a strong commitment to b
 compatibility to C and a taste for complexity.  
 
 Go is a beautiful and simple, its standard library is one of the most impressive
-for a programming language. It comes with concurrency built in, which makes it trivial 
-to write concurrent code, that includes (but is not limited to) running code in parallel. 
-The static site generator [hugo](https://gohugo.io) and the containerization plaform 
-[docker](https://www.docker.com/) are examples of systems that are built on Go. 
+for a programming language. It comes with concurrency built in, which includes 
+(but is not limited to) running code in parallel. The static site generator [hugo](https://gohugo.io) 
+and the containerization plaform [docker](https://www.docker.com/) are examples 
+of systems that are built on Go. 
 
 There currently is no end to end solution to easily connect R and Go, i.e. invoke Go code 
 from R, and this is what the `ergo` project is about, the ability for R packages to 
@@ -42,23 +43,23 @@ As opposed to `Rcpp`  which is a dependency in all stages (development, build, r
 code to interface R and Go via their respective C apis. From the point of view of the user of `ergo`, 
 the workflow will be:
 
-- write code in idiomatic Go
-- generate boiler plate with functions from `ergo`
-- call that code from R
+- Write code in idiomatic Go
+- Generate boiler plate (Go, R, C) with functions from `ergo`
+- Call that code from R
 
 The role of `ergo` is to hide the C layer entirely, so that users can focus on writing Go and R code. 
 In a way, this is similar to the feature of 
 [Rcpp attributes](https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-attributes.pdf)
 but it goes further. Once `ergo` has generated the code, the target package is autonomous. 
 
-Prior [work](https://purrple.cat/tags/go/) is our proof of concept, 
+Prior [work](https://purrple.cat/tags/go/) acts as a proof of concept, 
 and even though the code in the blog posts has been written manually, it is explicitely 
 divided in two different categories: 
-- code that the user would write. This is typical Go code using Go data structures such 
+- Code that the user would write. This is typical Go code using Go data structures such 
   as Go strings and slices. 
-- code that uses both `cgo` and `R` internal `C` apis. This code eventually is supposed to 
+- Code that uses both `cgo` and `R` internal `C` apis. This code eventually is supposed to 
   be generated automatically at development time. 
-This previous effort gives us enough confidence about the feasability of the project. 
+This previous effort gives me enough confidence about the feasability of the project. 
 
 The first step: Automatic generation 
 of boiler plate code to connect all basic R vector types and their associated 
@@ -71,8 +72,9 @@ At that stage, the project will need community adoption. The second step will
 involve promotion and development of use cases that demonstrate the use of `ergo`, 
 this will without doubt reveal needs that were not planned for. 
 
-A dedicated blogdown/hugo powered site (initially `https://go.rbind.io`) will be used throughout the various 
-phases of the project, perhaps with separate sections to isolate the technical 
+A dedicated blogdown/hugo powered site (initially `https://go.rbind.io`) 
+will be used throughout the various phases of the project, perhaps with 
+separate sections to isolate the technical 
 issues and feedback related to the development of `ergo` itself, from use case 
 material, perhaps featuring invited posts from the community. 
 
@@ -82,7 +84,9 @@ Go is currently not one of the languages supported by R, which might create fric
 down the line. In early phases of development, we can get away with 
 having installation instructions about the tools needed to use `ergo`. 
 
-But ultimately a package with Go code should be as easy to install as any other R package. 
+But ultimately a package with Go code should be as easy to install as any other R package, 
+in all the supported platforms. 
+
 The third step of the plan will consider the distribution of such packages, 
 can we use CRAN? If not, what else? Do we need code inside the base R distribution, 
 i.e. something similar to `R CMD javareconf` to help mitigate these issues. 
@@ -111,7 +115,7 @@ materialise as a development time R package.
 By design, `ergo` is only needed by package developers. End users of a package that contains
 code generated by `ergo` do not need to have `ergo` installed. 
 
-## Second iteration. $10k
+## Second iteration. $15k
 
 The second iteration is about reacting to community feedback, apply lessons learned, 
 and tighten the distribution of packages with code generated by `ergo`. 
@@ -121,12 +125,7 @@ and tighten the distribution of packages with code generated by `ergo`.
 ## Funding
 
 The main resource I need is funding for my time. With the milestones described above, 
-I can serenely spend the time this project needs. 
-
-## Travel
-
-This probably will require promotion in various meetups and conferences 
-for which I'd like to request funding. 
+I can serenely spend the time this project needs to be a success. 
 
 ## Advice on Licensing
 
@@ -140,7 +139,7 @@ The project will most likely require several public github repositories.
 The [rstats-go](https://github.com/rstats-go) organisation is setup to manage these. 
 The community will be encouraged to engage with these repos. 
 
-A blogdown/hugo powered website (`https://go.rbind.io`) will be setup
+A blogdown/hugo powered website (`https://go.rbind.io`) is in place
 to host blog posts related to the development, case studies, and documentation. 
 In addition, I plan to document the progress from a bird's eye on the consortium's blog. 
 Depending on the community's need for instant interraction, we can setup 
