@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # The problem
 
 R is an amazing interpreted language, giving a flexible and agile foundation for data science. 
-Efforts such as Rcpp and reticulate have established that it can bve an advantage 
+Efforts such as Rcpp and reticulate have established that it can be an advantage 
 to pair R with another programming language. Sometimes for speed, but most importantly 
 to have alternative options of expression. 
 
