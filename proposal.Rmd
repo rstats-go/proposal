@@ -91,7 +91,7 @@ i.e. something similar to `R CMD javareconf` to help mitigate these issues.
 
 I am a co-author of Rcpp that now has more than 1000 downstream dependencies, 
 the experience of having written Rcpp is extremely valuable in the pursuit of this project. 
-Curiosity about Go led me to inception this project in the 2017 summer. 
+Curiosity about Go led me to inception this project in the summer of 2017. 
 I have more than 12 years professional experience with R and a strong commitment 
 to open source development. 
 
@@ -142,11 +142,11 @@ The community will be encouraged to engage with these repos.
 
 A blogdown/hugo powered website (`https://go.rbind.io`) will be setup
 to host blog posts related to the development, case studies, and documentation. 
-In addition, I plan to document the progress from a bird's eye on the consortium's blog. 
+In addition, I plan to document the progress from a bird's eye view on the consortium's blog. 
 Depending on the community's need for instant interraction, we can setup 
 a slack team, or a gitter community. 
 
 It is unclear at the time of writing this proposal if `ergo` and the packages 
 containing `ergo` generated code can be hosted on CRAN. Both situations 
-can be considered, but CRAN deliveries packages is preferable. 
+can be considered, but CRAN delivered packages are preferable. 
 
