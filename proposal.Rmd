@@ -1,5 +1,6 @@
 ---
 title: "ergo proposal"
+author: "Romain François"
 output: github_document
 ---
 
