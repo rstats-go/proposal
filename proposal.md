@@ -1,13 +1,12 @@
 ergo proposal
 ================
 Romain François
-2018/03/30
 
 # The problem
 
 R is an amazing interpreted language, giving a flexible and agile
 foundation for data science. Efforts such as Rcpp and reticulate have
-established that it can bve an advantage to pair R with another
+established that it can be an advantage to pair R with another
 programming language. Sometimes for speed, but most importantly to have
 alternative options of expression.
 
@@ -17,13 +16,13 @@ sometimes said to be the language C++ should have been, in particular if
 it did not carry a strong commitment to backwards compatibility to C and
 a taste for complexity.
 
-Go is a beautiful and simple language. Its standard library is one of
-the most impressive for a programming language. It comes with
-concurrency built in, which makes it trivial to write concurrent code,
-that includes (but is not limited to) running code in parallel. The
-static site generator [hugo](https://gohugo.io) and the containerization
-plaform [docker](https://www.docker.com/) are examples of systems that
-are built on Go.
+Go is a beautiful and simple, its standard library is one of the most
+impressive for a programming language. It comes with concurrency built
+in, which makes it trivial to write concurrent code, that includes (but
+is not limited to) running code in parallel. The static site generator
+[hugo](https://gohugo.io) and the containerization plaform
+[docker](https://www.docker.com/) are examples of systems that are built
+on Go.
 
 There currently is no end to end solution to easily connect R and Go,
 i.e. invoke Go code from R, and this is what the `ergo` project is
@@ -98,7 +97,7 @@ CMD javareconf` to help mitigate these issues.
 I am a co-author of Rcpp that now has more than 1000 downstream
 dependencies, the experience of having written Rcpp is extremely
 valuable in the pursuit of this project. Curiosity about Go led me to
-inception this project in the 2017 summer. I have more than 12 years
+inception this project in the summer of 2017. I have more than 12 years
 professional experience with R and a strong commitment to open source
 development.
 
@@ -156,11 +155,11 @@ repos.
 A blogdown/hugo powered website (`https://go.rbind.io`) will be setup to
 host blog posts related to the development, case studies, and
 documentation. In addition, I plan to document the progress from a
-bird’s eye on the consortium’s blog. Depending on the community’s need
-for instant interraction, we can setup a slack team, or a gitter
+bird’s eye view on the consortium’s blog. Depending on the community’s
+need for instant interraction, we can setup a slack team, or a gitter
 community.
 
 It is unclear at the time of writing this proposal if `ergo` and the
 packages containing `ergo` generated code can be hosted on CRAN. Both
-situations can be considered, but CRAN deliveries packages is
+situations can be considered, but CRAN delivered packages are
 preferable.
