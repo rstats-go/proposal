@@ -30,10 +30,10 @@ There currently is no end to end solution to easily connect R and Go, i.e. invok
 from R, and this is what the `ergo` project is about, the ability for R packages to 
 leverage existing or original Go code. There admittedly are no
 specific use cases in mind, but at the same time it would have been impossible 
-to imagine the importance of Rcpp when it was first developped. 
+to imagine the importance of Rcpp when it was first developed. 
 
 Having Go as an alternative high performance language will open 
-interesting avenues for R package developpment. 
+interesting avenues for R package development. 
 
 # The plan
 
