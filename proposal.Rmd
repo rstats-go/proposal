@@ -133,13 +133,17 @@ Go is distributed under a [BSD-style license](https://golang.org/LICENSE), it ma
 to release `ergo` under a similar license, if not exactly the same. Feedback from the 
 consortium on this matter is welcome. 
 
+Since `ergo` is a development time dependency, are there issues to be concerned about
+in terms of the generated code. Is it licensed the same as its host project, or licensed
+as the `ergo` package. 
+
 # Dissemination
 
 The project will most likely require several public github repositories. 
 The [rstats-go](https://github.com/rstats-go) organisation is setup to manage these. 
 The community will be encouraged to engage with these repos. 
 
-A blogdown/hugo powered website (`https://go.rbind.io`) is in place
+A blogdown/hugo website (`https://go.rbind.io`) is in place
 to host blog posts related to the development, case studies, and documentation. 
 In addition, I plan to document the progress from a bird's eye on the consortium's blog. 
 Depending on the community's need for instant interraction, we can setup 
