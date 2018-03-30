@@ -21,7 +21,7 @@ build simple, reliable and efficient software. It is sometimes said to be the la
 C++ should have been, in particular if it did not carry a strong commitment to backwards
 compatibility to C and a taste for complexity.  
 
-Go is a beautiful and simple, its standard library is one of the most impressive
+Go is beautiful and simple, its standard library is one of the most impressive
 for a programming language. It comes with concurrency built in, which includes 
 (but is not limited to) running code in parallel. The static site generator [hugo](https://gohugo.io) 
 and the containerization plaform [docker](https://www.docker.com/) are examples 
@@ -95,7 +95,7 @@ i.e. something similar to `R CMD javareconf` to help mitigate these issues.
 
 I am a co-author of Rcpp that now has more than 1000 downstream dependencies, 
 the experience of having written Rcpp is extremely valuable in the pursuit of this project. 
-Curiosity about Go led me to inception this project in the summer of 2017. 
+Curiosity about Go led me to incept this project in the summer of 2017. 
 I have more than 12 years professional experience with R and a strong commitment 
 to open source development. 
 
