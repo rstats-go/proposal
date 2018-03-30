@@ -20,7 +20,7 @@ build simple, reliable and efficient software. It is sometimes said to be the la
 C++ should have been, in particular if it did not carry a strong commitment to backwards
 compatibility to C and a taste for complexity.  
 
-Go is a beautiful and simple language. Its standard library is one of the most impressive
+Go is a beautiful and simple, its standard library is one of the most impressive
 for a programming language. It comes with concurrency built in, which makes it trivial 
 to write concurrent code, that includes (but is not limited to) running code in parallel. 
 The static site generator [hugo](https://gohugo.io) and the containerization plaform 
