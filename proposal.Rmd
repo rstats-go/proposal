@@ -14,7 +14,9 @@ knitr::opts_chunk$set(echo = TRUE)
 R is an amazing interpreted language, giving a flexible and agile foundation for Data Science. 
 Efforts such as Rcpp and reticulate have established that it can be an advantage 
 to pair R with another programming language. Sometimes for speed, but most importantly 
-to have alternative options of expression. 
+to have alternative options of expression.
+
+> Maybe mention that we sometimes want to use existing implementations?
 
 [Go](https://golang.org) is an open source programming language that makes it easy to 
 build simple, reliable and efficient software. It is sometimes said to be the language 
@@ -23,21 +25,53 @@ compatibility to C and a taste for complexity.
 
 Go is beautiful and simple, its standard library is one of the most impressive
 for a programming language. It comes with concurrency built in, which includes 
-(but is not limited to) running code in parallel. The static site generator [hugo](https://gohugo.io) 
-and the containerization plaform [docker](https://www.docker.com/) are examples 
-of systems that are built on Go. 
+(but is not limited to) running code in parallel. The static site generator [hugo](https://gohugo.io),
+the containerization plaform [docker](https://www.docker.com/), and the profiling utility [pprof](https://github.com/google/pprof) are examples 
+of systems that are built with Go. 
 
 There currently is no end to end solution to easily connect R and Go, i.e. invoke Go code 
 from R, and this is what the `ergo` project is about, the ability for R packages to 
-leverage existing or original Go code. There admittedly are no
-specific use cases in mind, but at the same time it would have been impossible 
-to imagine the importance of Rcpp when it was first developed. 
-
-Having Go as an alternative high performance language will open 
+leverage existing or original Go code. Having Go as an alternative high performance language will open 
 interesting avenues for R package development. 
+
+# Prior art
+
+## Rcpp
+
+The Rcpp package by Eddelbuettel and François is the current state of the practice to connect C++ code with R, used by over 1300 CRAN packages.
+With Rcpp it is very easy to make a C++ function callable from R: mark the function with [attributes](https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-attributes.pdf), and Rcpp generates the glue code that takes care of converting input and output data and propagating errors.
+Rcpp offers the `Vector` class, with specializations like `IntegerVector`, `CharacterVector`, and `List`, that allow accessing R data structures in a way idiomatic to C++.
+Rcpp sugar supports writing C++ code that almost looks like R code but implements the operations internally without roundtripping to R.
+
+## rmq
+
+The rmq package (https://github.com/glycerine/rmq) by Jason E. Aten is scoped
+as a proof of concept to embed a Go library in an R package.
+The code uses msgpack, a serialization protocol, to pass data between R and Go,
+and implements a client-server system using websockets.
+According to the author, the project is finished.
+Unfortunately, installation of this package requires tweaking the code, so far I
+was unable to install the package and test the code on OS X and Ubuntu.
+
+
+## r-go proof of concept
+
+Independently of rmq, I have written four blog posts at 
+https://purrple.cat/tags/go/ that describe how to
+embed a Go library in an R package so that it is compiled when
+the R package is installed.
+I show how to call functions in the library and how to pass data to and from Go.
+Even though the code in the blog posts has been written manually, it is explicitely 
+divided in two different categories: 
+
+- Code that the user would write. This is typical Go code using Go data structures such 
+  as Go strings and slices. 
+- Code that uses both `cgo` and `R` internal `C` apis. This code eventually is supposed to 
+  be generated automatically at development time. 
 
 # The plan
 
+The previous efforts to connect C++ and Go to R give me enough confidence about the feasability of the project.
 As opposed to `Rcpp`  which is a dependency in all stages (development, build, runtime), 
 `ergo` will only be *development time dependency* that facilitates the generation of 
 code to interface R and Go via their respective C apis. From the point of view of the user of `ergo`, 
@@ -49,26 +83,26 @@ the workflow will be:
 
 The role of `ergo` is to hide the C layer entirely, so that users can focus on writing Go and R code. 
 In a way, this is similar to the feature of 
-[Rcpp attributes](https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-attributes.pdf)
-but it goes further. Once `ergo` has generated the code, the target package is autonomous. 
+Rcpp attributes,
+but it goes further. Once `ergo` has generated the code, the target package is autonomous.
 
-Prior [work](https://purrple.cat/tags/go/) acts as a proof of concept, 
-and even though the code in the blog posts has been written manually, it is explicitely 
-divided in two different categories: 
-- Code that the user would write. This is typical Go code using Go data structures such 
-  as Go strings and slices. 
-- Code that uses both `cgo` and `R` internal `C` apis. This code eventually is supposed to 
-  be generated automatically at development time. 
-This previous effort gives me enough confidence about the feasability of the project. 
+## First iteration
 
-The first step: Automatic generation 
+Automatic generation 
 of boiler plate code to connect all basic R vector types and their associated 
-scalar types in both function inputs and return types. The Go standard library
+scalar types in both function inputs and return types.
+The Go standard library
 includes a [parser](https://golang.org/pkg/go/parser/) 
 package, this gives an abstract syntax tree of Go code that 
 can drive the code generation. 
+The details of the connection implemented by the boiler plate are subject to
+further research, I will also consider a msgpack-based connection like in rmq.
 
-At that stage, the project will need community adoption. The second step will 
+At that stage, the project will need community adoption.
+
+## Second iteration
+
+The second step will 
 involve promotion and development of use cases that demonstrate the use of `ergo`, 
 this will without doubt reveal needs that were not planned for. 
 
@@ -77,6 +111,10 @@ will be used throughout the various phases of the project, perhaps with
 separate sections to isolate the technical 
 issues and feedback related to the development of `ergo` itself, from use case 
 material, perhaps featuring invited posts from the community. 
+
+The third step of the plan will consider the distribution of such packages, 
+can we use CRAN? If not, what else? Do we need code inside the base R distribution, 
+i.e. something similar to `R CMD javareconf` to help mitigate these issues?
 
 ## Failure modes
 
@@ -87,9 +125,9 @@ having installation instructions about the tools needed to use `ergo`.
 But ultimately a package with Go code should be as easy to install as any other R package, 
 in all the supported platforms. 
 
-The third step of the plan will consider the distribution of such packages, 
-can we use CRAN? If not, what else? Do we need code inside the base R distribution, 
-i.e. something similar to `R CMD javareconf` to help mitigate these issues. 
+Admittedly, this project does not have
+specific use cases in mind, but at the same time it would have been impossible 
+to imagine the importance of Rcpp when it was first developed. 
 
 ## About the author
 
@@ -144,14 +182,14 @@ as the `ergo` package.
 # Dissemination
 
 The project will most likely require several public github repositories. 
-The [rstats-go](https://github.com/rstats-go) organisation is setup to manage these. 
+I have set up the [rstats-go](https://github.com/rstats-go) organisation to manage these. 
 The community will be encouraged to engage with these repos. 
 
 A blogdown/hugo website (`https://go.rbind.io`) is in place
 to host blog posts related to the development, case studies, and documentation. 
 
 In addition, I plan to document the progress from a bird's eye view on the consortium's blog. 
-Depending on the community's need for instant interraction, we can setup 
+Depending on the community's need for instant interraction, we can set up 
 a slack team, or a gitter community. 
 
 A more formal scientific article in e.g. R Journal or the Journal of Statistical Software
@@ -160,4 +198,3 @@ will be considered once the project is stable enough.
 It is unclear at the time of writing this proposal if `ergo` and the packages 
 containing `ergo` generated code can be hosted on CRAN. Both situations 
 can be considered, but CRAN delivered packages are preferable. 
-
