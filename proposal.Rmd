@@ -10,9 +10,9 @@ knitr::opts_chunk$set(echo = TRUE)
 # The problem
 
 R is an amazing interpreted language, giving a flexible and agile foundation for data science. 
-It is however sometimes slow. This is typically not a problem these days with the 
-ubiquity of `Rcpp`, making it possible and relatively easy 
-to connect R and a compiled language, namely C++. 
+Efforts such as Rcpp and reticulate have established that it can bve an advantage 
+to pair R with another programming language. Sometimes for speed, but most importantly 
+to have alternative options of expression. 
 
 [Go](https://golang.org) is an open source programming language that makes it easy to 
 build simple, reliable and efficient software. It is sometimes said to be the language 
@@ -22,13 +22,12 @@ compatibility to C and a taste for complexity.
 `Go` is a beautiful and simple language. Its standard library is one of the most impressive
 for a programming language. It comes with concurrency built in, which makes it trivial 
 to write concurrent code, that includes (but is not limited to) running code in parallel. 
-
 The static site generator [hugo](https://gohugo.io) and the containerization plaform 
 [docker](https://www.docker.com/) are examples of systems that are built on go. 
 
-There currently is no solution to easily connect R and go, i.e. invoke go code 
-from R, and this is what this project is about. We want R packages to 
-be able to leverage existing or original go code. We admittedly do not have 
+There currently is no end to end solution to easily connect R and go, i.e. invoke go code 
+from R, and this is what the `ergo` project is about. We want R packages to 
+be able to leverage existing or original Go code. We admittedly do not have 
 specific use cases in mind, but at the same time it would have been impossible 
 to imagine the importance of Rcpp when it was first developped. 
 
