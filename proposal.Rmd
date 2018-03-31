@@ -1,7 +1,7 @@
 ---
 title: "ergo: high level interface between R and Go"
 author: "Romain François"
-date: 2018/03/30
+date: 2018/03/31
 output: pdf_document
 ---
 
@@ -13,12 +13,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 R is an amazing interpreted language, giving a flexible and agile foundation for Data Science. 
 Efforts such as Rcpp and reticulate have established that it can be an advantage 
-to pair R with another programming language. Sometimes for speed, but most importantly 
-to have alternative options of expression.
+to pair R with another programming language. Sometimes for speed, sometimes to 
+have alternative options of expression, sometimes to have access to existing 
+libraries. 
 
-> Maybe mention that we sometimes want to use existing implementations?
-
-[Go](https://golang.org) is an open source programming language that makes it easy to 
+Go (`https://golang.org`) is an open source programming language that makes it easy to 
 build simple, reliable and efficient software. It is sometimes said to be the language 
 C++ should have been, in particular if it did not carry a strong commitment to backwards
 compatibility to C and a taste for complexity.  
@@ -26,7 +25,8 @@ compatibility to C and a taste for complexity.
 Go is beautiful and simple, its standard library is one of the most impressive
 for a programming language. It comes with concurrency built in, which includes 
 (but is not limited to) running code in parallel. The static site generator [hugo](https://gohugo.io),
-the containerization plaform [docker](https://www.docker.com/), and the profiling utility [pprof](https://github.com/google/pprof) are examples 
+the containerization plaform [docker](https://www.docker.com/), and the profiling 
+utility [pprof](https://github.com/google/pprof) are examples 
 of systems that are built with Go. 
 
 There currently is no end to end solution to easily connect R and Go, i.e. invoke Go code 
@@ -38,28 +38,22 @@ interesting avenues for R package development.
 
 ## Rcpp
 
-The Rcpp package by Eddelbuettel and François is the current state of the practice to connect C++ code with R, used by over 1300 CRAN packages.
-With Rcpp it is very easy to make a C++ function callable from R: mark the function with [attributes](https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-attributes.pdf), and Rcpp generates the glue code that takes care of converting input and output data and propagating errors.
-Rcpp offers the `Vector` class, with specializations like `IntegerVector`, `CharacterVector`, and `List`, that allow accessing R data structures in a way idiomatic to C++.
-Rcpp sugar supports writing C++ code that almost looks like R code but implements the operations internally without roundtripping to R.
+The Rcpp package (`https://github.com/RcppCore/Rcpp`) is the current state of the practice to connect C++ code with R, 
+used by over 1300 CRAN packages. With Rcpp it is very easy to make a C++ function callable from R: mark the function with [attributes](https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-attributes.pdf), and Rcpp generates the glue code that takes care of converting input and output data and propagating errors.
+Rcpp offers classes such as `NumericVector`, and `List`, 
+that allow accessing most R data structures in a way idiomatic to C++.
 
 ## rmq
 
-The rmq package (https://github.com/glycerine/rmq) by Jason E. Aten is scoped
+The rmq package (`https://github.com/glycerine/rmq`) is scoped
 as a proof of concept to embed a Go library in an R package.
 The code uses msgpack, a serialization protocol, to pass data between R and Go,
 and implements a client-server system using websockets.
-According to the author, the project is finished.
-Unfortunately, installation of this package requires tweaking the code, so far I
-was unable to install the package and test the code on OS X and Ubuntu.
-
 
 ## r-go proof of concept
 
-Independently of rmq, I have written four blog posts at 
-https://purrple.cat/tags/go/ that describe how to
-embed a Go library in an R package so that it is compiled when
-the R package is installed.
+Independently of rmq, I have written a series of blog posts at `https://purrple.cat/tags/go/` that describe how to
+embed Go code in an R package so that it is compiled when the R package is installed.
 I show how to call functions in the library and how to pass data to and from Go.
 Even though the code in the blog posts has been written manually, it is explicitely 
 divided in two different categories: 
@@ -77,14 +71,14 @@ As opposed to `Rcpp`  which is a dependency in all stages (development, build, r
 code to interface R and Go via their respective C apis. From the point of view of the user of `ergo`, 
 the workflow will be:
 
-- Write code in idiomatic Go
+- Write code in idiomatic Go somewhere standard in the package
 - Generate boiler plate (Go, R, C) with functions from `ergo`
-- Call that code from R
+- Call that code from R functions of the package
 
 The role of `ergo` is to hide the C layer entirely, so that users can focus on writing Go and R code. 
-In a way, this is similar to the feature of 
-Rcpp attributes,
-but it goes further. Once `ergo` has generated the code, the target package is autonomous.
+In a way, this is similar to the feature of Rcpp attributes,
+but it goes further. Once `ergo` has generated the code, the target package is autonomous. This gives 
+more control to the package authors and eliminate a set of issues related to dependency. 
 
 ## First iteration
 
@@ -131,11 +125,13 @@ to imagine the importance of Rcpp when it was first developed.
 
 ## About the author
 
-I am a co-author of Rcpp that now has more than 1000 downstream dependencies, 
-the experience of having written Rcpp is extremely valuable in the pursuit of this project. 
-Curiosity about Go led me to incept this project in the summer of 2017. 
 I have more than 12 years professional experience with R and a strong commitment 
 to open source development. 
+
+I am a co-author of Rcpp that now has more than 1000 downstream dependencies, 
+the experience of having written Rcpp is extremely valuable in the pursuit of this project. 
+
+Curiosity about Go led me to incept this project in the summer of 2017. 
 
 ## Commitment 
 
